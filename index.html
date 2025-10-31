@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etika AI - Etika Penggunaan Kecerdasan Buatan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles untuk loading spinner */
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Smooth transition untuk tema */
+        * {
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #374151;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <h1 class="text-xl font-bold text-blue-600 dark:text-blue-400">Etika AI</h1>
+            </div>
+            
+            <!-- Navigasi -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+                <a href="#articles" class="nav-link hover:text-blue-600 dark:hover:text-blue-400">Artikel</a>
+                <a href="#about" class="nav-link hover:text-blue-600 dark:hover:text-blue-400">Tentang</a>
+            </nav>
+            
+            <!-- Controls -->
+            <div class="flex items-center space-x-4">
+                <!-- Toggle Bahasa -->
+                <button id="language-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Ganti Bahasa">
+                    <span id="language-flag">🇮🇩</span>
+                </button>
+                
+                <!-- Toggle Tema -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Ganti Tema">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+                
+                <!-- Login/User -->
+                <button id="login-button" class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                    <i class="fas fa-user"></i>
+                    <span id="login-text">Login</span>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 px-4 py-2 shadow-md">
+            <a href="#home" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+            <a href="#articles" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Artikel</a>
+            <a href="#about" class="block py-2 hover:text-blue-600 dark:hover:text-blue-400">Tentang</a>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <div class="loading-spinner mb-4"></div>
+            <p id="loading-text" class="text-center">Memuat...</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-16 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 id="hero-title" class="text-4xl md:text-5xl font-bold mb-6">Etika Penggunaan Kecerdasan Buatan</h1>
+            <p id="hero-subtitle" class="text-xl mb-8 max-w-2xl mx-auto">Panduan komprehensif untuk penggunaan AI yang bertanggung jawab dan etis di berbagai bidang kehidupan.</p>
+            <button id="read-articles-btn" class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-lg transition-colors">
+                Baca Artikel Terbaru
+            </button>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section id="articles" class="py-16 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 id="articles-title" class="text-3xl font-bold mb-12 text-center">Artikel Etika AI</h2>
+            
+            <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artikel akan dimuat di sini -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 id="about-title" class="text-3xl font-bold mb-8 text-center">Tentang Website Ini</h2>
+            <div class="max-w-3xl mx-auto">
+                <p id="about-description" class="text-lg mb-6">
+                    Website ini dibuat untuk memberikan informasi dan panduan mengenai etika penggunaan Kecerdasan Buatan (AI). 
+                    Dengan perkembangan teknologi AI yang pesat, penting bagi kita untuk memahami implikasi etis dari penggunaannya 
+                    dan memastikan bahwa teknologi ini dikembangkan dan digunakan secara bertanggung jawab.
+                </p>
+                <p id="about-mission" class="text-lg mb-6">
+                    Misi kami adalah menyediakan sumber daya yang dapat diakses untuk membantu individu, organisasi, dan pembuat 
+                    kebijakan memahami prinsip-prinsip etika AI dan menerapkannya dalam praktik sehari-hari.
+                </p>
+                <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-lg">
+                    <h3 id="about-sources-title" class="text-xl font-semibold mb-4">Sumber Artikel</h3>
+                    <p id="about-sources" class="mb-4">
+                        Artikel-artikel di website ini diambil dari berbagai sumber terpercaya seperti:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>UNESCO - Recommendation on the Ethics of Artificial Intelligence</li>
+                        <li>OECD - AI Principles / overview</li>
+                        <li>European Commission - Ethics Guidelines for Trustworthy AI</li>
+                        <li>MIT Technology Review / Wired - artikel bias algoritma</li>
+                        <li>The Guardian - berita transparansi penggunaan AI</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Etika AI</h3>
+                    <p id="footer-copyright" class="text-gray-400">&copy; 2023 Etika AI. Semua hak dilindungi.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p id="footer-version" class="text-gray-400">Versi 1.0</p>
+                    <p id="footer-source" class="text-gray-400">Sumber: UNESCO, OECD, European Commission</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4">
+            <div class="flex justify-between items-center p-6 border-b dark:border-gray-700">
+                <h3 id="login-modal-title" class="text-xl font-bold">Login</h3>
+                <button id="close-login-modal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="flex border-b dark:border-gray-700">
+                <button id="login-tab" class="flex-1 py-3 font-medium text-center border-b-2 border-blue-600 text-blue-600">Login</button>
+                <button id="register-tab" class="flex-1 py-3 font-medium text-center text-gray-500 dark:text-gray-400">Daftar</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="p-6">
+                <div class="mb-4">
+                    <label for="login-email" class="block mb-2 font-medium">Email</label>
+                    <input type="email" id="login-email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block mb-2 font-medium">Password</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required minlength="6">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-colors">
+                    Login
+                </button>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="p-6 hidden">
+                <div class="mb-4">
+                    <label for="register-username" class="block mb-2 font-medium">Username</label>
+                    <input type="text" id="register-username" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block mb-2 font-medium">Email</label>
+                    <input type="email" id="register-email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                </div>
+                <div class="mb-6">
+                    <label for="register-password" class="block mb-2 font-medium">Password</label>
+                    <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required minlength="6">
+                </div>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-medium transition-colors">
+                    Daftar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Article Detail Modal -->
+    <div id="article-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center p-6 border-b dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+                <h3 id="article-modal-title" class="text-xl font-bold"></h3>
+                <button id="close-article-modal" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div id="article-modal-content" class="prose dark:prose-invert max-w-none">
+                    <!-- Konten artikel akan dimuat di sini -->
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button id="copy-source-btn" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+                        <i class="fas fa-copy"></i>
+                        <span id="copy-source-text">Salin Sumber</span>
+                    </button>
+                    <button id="open-source-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span id="open-source-text">Buka Sumber Asli</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Data terjemahan
+        const translations = {
+            id: {
+                // Header
+                "home": "Home",
+                "articles": "Artikel",
+                "about": "Tentang",
+                "login": "Login",
+                "logout": "Logout",
+                "welcome": "Selamat datang, ",
+                
+                // Hero
+                "hero-title": "Etika Penggunaan Kecerdasan Buatan",
+                "hero-subtitle": "Panduan komprehensif untuk penggunaan AI yang bertanggung jawab dan etis di berbagai bidang kehidupan.",
+                "read-articles-btn": "Baca Artikel Terbaru",
+                
+                // Articles
+                "articles-title": "Artikel Etika AI",
+                "read-more": "Baca Lebih",
+                "copy-source": "Salin Sumber",
+                "open-source": "Buka Sumber Asli",
+                
+                // About
+                "about-title": "Tentang Website Ini",
+                "about-description": "Website ini dibuat untuk memberikan informasi dan panduan mengenai etika penggunaan Kecerdasan Buatan (AI). Dengan perkembangan teknologi AI yang pesat, penting bagi kita untuk memahami implikasi etis dari penggunaannya dan memastikan bahwa teknologi ini dikembangkan dan digunakan secara bertanggung jawab.",
+                "about-mission": "Misi kami adalah menyediakan sumber daya yang dapat diakses untuk membantu individu, organisasi, dan pembuat kebijakan memahami prinsip-prinsip etika AI dan menerapkannya dalam praktik sehari-hari.",
+                "about-sources-title": "Sumber Artikel",
+                "about-sources": "Artikel-artikel di website ini diambil dari berbagai sumber terpercaya seperti:",
+                
+                // Footer
+                "footer-copyright": "&copy; 2023 Etika AI. Semua hak dilindungi.",
+                "footer-version": "Versi 1.0",
+                "footer-source": "Sumber: UNESCO, OECD, European Commission",
+                
+                // Login Modal
+                "login-modal-title": "Login",
+                "login-tab": "Login",
+                "register-tab": "Daftar",
+                "login-email": "Email",
+                "login-password": "Password",
+                "register-username": "Username",
+                "register-email": "Email",
+                "register-password": "Password",
+                "login-submit": "Login",
+                "register-submit": "Daftar",
+                
+                // Loading
+                "loading-text": "Memuat...",
+                "loading-login": "Sedang login...",
+                "loading-register": "Sedang mendaftar...",
+                "loading-articles": "Memuat artikel...",
+                "loading-language": "Mengganti bahasa...",
+                
+                // Messages
+                "login-success": "Login berhasil!",
+                "register-success": "Pendaftaran berhasil! Silakan login.",
+                "logout-success": "Logout berhasil!",
+                "copy-success": "Sumber berhasil disalin ke clipboard!",
+                "error-required": "Semua field harus diisi!",
+                "error-email": "Format email tidak valid!",
+                "error-password": "Password minimal 6 karakter!",
+                "error-login": "Email atau password salah!",
+                "error-user-exists": "Email sudah terdaftar!",
+                
+                // Article tags
+                "privacy": "Privasi",
+                "bias": "Bias",
+                "accountability": "Akuntabilitas",
+                "regulation": "Regulasi"
+            },
+            en: {
+                // Header
+                "home": "Home",
+                "articles": "Articles",
+                "about": "About",
+                "login": "Login",
+                "logout": "Logout",
+                "welcome": "Welcome, ",
+                
+                // Hero
+                "hero-title": "Ethics of Artificial Intelligence Usage",
+                "hero-subtitle": "A comprehensive guide for responsible and ethical use of AI in various fields of life.",
+                "read-articles-btn": "Read Latest Articles",
+                
+                // Articles
+                "articles-title": "AI Ethics Articles",
+                "read-more": "Read More",
+                "copy-source": "Copy Source",
+                "open-source": "Open Original Source",
+                
+                // About
+                "about-title": "About This Website",
+                "about-description": "This website is created to provide information and guidance on the ethics of Artificial Intelligence (AI) usage. With the rapid development of AI technology, it is important for us to understand the ethical implications of its use and ensure that this technology is developed and used responsibly.",
+                "about-mission": "Our mission is to provide accessible resources to help individuals, organizations, and policymakers understand AI ethics principles and apply them in daily practice.",
+                "about-sources-title": "Article Sources",
+                "about-sources": "Articles on this website are taken from various trusted sources such as:",
+                
+                // Footer
+                "footer-copyright": "&copy; 2023 AI Ethics. All rights reserved.",
+                "footer-version": "Version 1.0",
+                "footer-source": "Sources: UNESCO, OECD, European Commission",
+                
+                // Login Modal
+                "login-modal-title": "Login",
+                "login-tab": "Login",
+                "register-tab": "Register",
+                "login-email": "Email",
+                "login-password": "Password",
+                "register-username": "Username",
+                "register-email": "Email",
+                "register-password": "Password",
+                "login-submit": "Login",
+                "register-submit": "Register",
+                
+                // Loading
+                "loading-text": "Loading...",
+                "loading-login": "Logging in...",
+                "loading-register": "Registering...",
+                "loading-articles": "Loading articles...",
+                "loading-language": "Changing language...",
+                
+                // Messages
+                "login-success": "Login successful!",
+                "register-success": "Registration successful! Please login.",
+                "logout-success": "Logout successful!",
+                "copy-success": "Source copied to clipboard!",
+                "error-required": "All fields are required!",
+                "error-email": "Invalid email format!",
+                "error-password": "Password must be at least 6 characters!",
+                "error-login": "Wrong email or password!",
+                "error-user-exists": "Email already registered!",
+                
+                // Article tags
+                "privacy": "Privacy",
+                "bias": "Bias",
+                "accountability": "Accountability",
+                "regulation": "Regulation"
+            }
+        };
+
+        // Data artikel tentang etika AI
+        const articles = [
+            {
+                id: 1,
+                title: {
+                    id: "Prinsip Etika AI UNESCO",
+                    en: "UNESCO AI Ethics Principles"
+                },
+                summary: {
+                    id: "UNESCO telah mengadopsi Rekomendasi pertama di dunia tentang Etika Kecerdasan Buatan. Dokumen ini menetapkan prinsip-prinsip dasar untuk pengembangan dan penggunaan AI yang bertanggung jawab, termasuk penghormatan terhadap hak asasi manusia, transparansi, keadilan, dan keberlanjutan.",
+                    en: "UNESCO has adopted the world's first Recommendation on the Ethics of Artificial Intelligence. This document establishes fundamental principles for the responsible development and use of AI, including respect for human rights, transparency, fairness, and sustainability."
+                },
+                fullContent: {
+                    id: "Rekomendasi UNESCO tentang Etika Kecerdasan Buatan adalah instrumen global pertama yang menetapkan kerangka etika universal untuk AI. Dokumen ini diadopsi oleh 193 negara anggota UNESCO pada November 2021. Prinsip-prinsip utamanya mencakup: 1) Menghormati, melindungi, dan memajukan hak asasi manusia dan martabat manusia; 2) Lingkungan yang berkembang dan makmur; 3) Memastikan keragaman dan inklusi; 4) Kehidupan yang damai dan masyarakat yang harmonis; 5) Nilai-nilai kepercayaan. Rekomendasi ini juga menyoroti pentingnya pemeriksaan etika dan mekanisme pengawasan, serta perlunya kerjasama internasional untuk memastikan AI dikembangkan dan digunakan untuk kebaikan umat manusia.",
+                    en: "UNESCO's Recommendation on the Ethics of Artificial Intelligence is the first global instrument to establish a universal ethical framework for AI. This document was adopted by 193 UNESCO member states in November 2021. Its main principles include: 1) Respect, protect and promote human rights and human dignity; 2) Environment and flourishing; 3) Ensuring diversity and inclusion; 4) Living in peaceful, just and interconnected societies; 5) Trustworthiness. The Recommendation also highlights the importance of ethical assessment and oversight mechanisms, and the need for international cooperation to ensure AI is developed and used for the benefit of humanity."
+                },
+                date: "2021-11-25",
+                tags: ["regulation", "accountability"],
+                source: {
+                    name: "UNESCO",
+                    url: "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics"
+                }
+            },
+            {
+                id: 2,
+                title: {
+                    id: "Prinsip AI OECD",
+                    en: "OECD AI Principles"
+                },
+                summary: {
+                    id: "OECD telah mengembangkan Prinsip AI yang bertujuan untuk mempromosikan AI yang inovatif dan dapat dipercaya. Prinsip-prinsip ini menekankan pada AI yang menghormati hak asasi manusia dan nilai-nilai demokratis, serta transparansi dan penjelasan yang memadai tentang sistem AI.",
+                    en: "The OECD has developed AI Principles that aim to promote innovative and trustworthy AI. These principles emphasize AI that respects human rights and democratic values, as well as transparency and adequate explanation of AI systems."
+                },
+                fullContent: {
+                    id: "Prinsip AI OECD terdiri dari lima nilai-based principles dan lima rekomendasi kebijakan. Nilai-based principles mencakup: 1) AI harus memberikan manfaat bagi manusia dan planet; 2) Sistem AI harus dirancang dengan cara yang menghormati hukum, hak asasi manusia, nilai-nilai demokratis, dan keragaman; 3) Harus ada transparansi dan penjelasan yang memadai tentang sistem AI; 4) Sistem AI harus kuat, aman, dan aman sepanjang siklus hidupnya; 5) Organisasi dan individu yang mengembangkan, menyebarkan, atau mengoperasikan sistem AI harus bertanggung jawab atas fungsi yang tepat sesuai dengan prinsip-prinsip ini. Rekomendasi kebijakan mencakup investasi dalam penelitian AI, memupuk ekosistem AI yang digital, membentuk lingkungan kebijakan yang memungkinkan, membangun kapasitas manusia, dan kerjasama internasional.",
+                    en: "The OECD AI Principles consist of five value-based principles and five policy recommendations. The value-based principles include: 1) AI should benefit people and the planet; 2) AI systems should be designed in a way that respects the rule of law, human rights, democratic values and diversity; 3) There should be transparency and responsible disclosure around AI systems; 4) AI systems must function in a robust, secure and safe way throughout their life cycles; 5) Organizations and individuals developing, deploying or operating AI systems should be held accountable for their proper functioning in line with the above principles. The policy recommendations cover investing in AI research, fostering a digital AI ecosystem, shaping an enabling policy environment, building human capacity, and international cooperation."
+                },
+                date: "2019-05-22",
+                tags: ["regulation", "accountability"],
+                source: {
+                    name: "OECD",
+                    url: "https://oecd.ai/en/ai-principles"
+                }
+            },
+            {
+                id: 3,
+                title: {
+                    id: "Panduan Etika AI Komisi Eropa",
+                    en: "European Commission AI Ethics Guidelines"
+                },
+                summary: {
+                    id: "Komisi Eropa telah menerbitkan Panduan Etika untuk AI yang Dapat Dipercaya, yang menetapkan kerangka untuk AI yang etis dan dapat dipercaya. Panduan ini menekankan pada AI yang sah, etis, dan kuat, dengan fokus pada hak asasi manusia, keadilan, dan kesejahteraan.",
+                    en: "The European Commission has published Ethics Guidelines for Trustworthy AI, which establish a framework for ethical and trustworthy AI. These guidelines emphasize lawful, ethical, and robust AI, with a focus on human rights, fairness, and well-being."
+                },
+                fullContent: {
+                    id: "Panduan Etika AI Komisi Eropa mendefinisikan AI yang Dapat Dipercaya sebagai AI yang: 1) Sah (mematuhi semua hukum dan peraturan yang berlaku); 2) Etis (menghormati prinsip dan nilai etika); 3) Kuat (baik dari perspektif teknis dan sosial). Panduan ini mengidentifikasi tujuh persyaratan kunci untuk AI yang Dapat Dipercaya: 1) Pengawasan dan intervensi manusia; 2) Kekokohan teknis dan keamanan; 3) Privasi dan tata kelola data; 4) Transparansi; 5) Keragaman, non-diskriminasi, dan keadilan; 6) Kesejahteraan sosial dan lingkungan; 7) Akuntabilitas. Panduan ini juga menyediakan daftar periksa penilaian untuk membantu penerapan prinsip-prinsip ini dalam praktik.",
+                    en: "The European Commission's AI Ethics Guidelines define Trustworthy AI as AI that is: 1) Lawful (complying with all applicable laws and regulations); 2) Ethical (respecting ethical principles and values); 3) Robust (both from a technical and social perspective). The guidelines identify seven key requirements for Trustworthy AI: 1) Human agency and oversight; 2) Technical robustness and safety; 3) Privacy and data governance; 4) Transparency; 5) Diversity, non-discrimination and fairness; 6) Societal and environmental well-being; 7) Accountability. The guidelines also provide an assessment checklist to help implement these principles in practice."
+                },
+                date: "2019-04-08",
+                tags: ["regulation", "privacy"],
+                source: {
+                    name: "European Commission",
+                    url: "https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence"
+                }
+            },
+            {
+                id: 4,
+                title: {
+                    id: "Bias Algoritma dalam Sistem AI",
+                    en: "Algorithmic Bias in AI Systems"
+                },
+                summary: {
+                    id: "Artikel ini membahas masalah bias dalam sistem AI dan bagaimana bias ini dapat memperkuat ketidakadilan sosial yang sudah ada. Penelitian menunjukkan bahwa sistem AI dapat menunjukkan bias terhadap kelompok tertentu berdasarkan data pelatihan yang tidak representatif atau algoritma yang bias.",
+                    en: "This article discusses the problem of bias in AI systems and how this bias can reinforce existing social injustices. Research shows that AI systems can exhibit bias against certain groups based on unrepresentative training data or biased algorithms."
+                },
+                fullContent: {
+                    id: "Bias algoritma telah menjadi masalah signifikan dalam sistem AI, dengan contoh-contoh terkenal termasuk sistem perekrutan yang mendiskriminasi perempuan, sistem pengenalan wajah yang kurang akurat untuk orang dengan kulit gelap, dan algoritma penilaian kredit yang bias terhadap komunitas tertentu. Bias ini sering kali berasal dari data pelatihan yang tidak representatif atau mencerminkan bias historis yang ada dalam masyarakat. Mengatasi bias algoritma memerlukan pendekatan multi-dimensi, termasuk: 1) Pengumpulan data yang lebih beragam dan representatif; 2) Audit dan pengujian bias yang ketat; 3) Pengembangan teknik de-biasing; 4) Meningkatkan keragaman dalam tim pengembangan AI; 5) Transparansi dan penjelasan tentang bagaimana sistem AI membuat keputusan. Penelitian terbaru juga mengeksplorasi penggunaan AI untuk mendeteksi dan mengurangi bias dalam sistem lain, menciptakan potensi untuk alat de-biasing yang lebih canggih di masa depan.",
+                    en: "Algorithmic bias has become a significant problem in AI systems, with famous examples including hiring systems that discriminate against women, facial recognition systems that are less accurate for people with dark skin, and credit scoring algorithms that are biased against certain communities. This bias often stems from unrepresentative training data or reflects existing historical biases in society. Addressing algorithmic bias requires a multi-dimensional approach, including: 1) More diverse and representative data collection; 2) Rigorous bias auditing and testing; 3) Development of de-biasing techniques; 4) Increasing diversity in AI development teams; 5) Transparency and explanation of how AI systems make decisions. Recent research also explores using AI to detect and reduce bias in other systems, creating potential for more sophisticated de-biasing tools in the future."
+                },
+                date: "2022-03-15",
+                tags: ["bias", "accountability"],
+                source: {
+                    name: "MIT Technology Review",
+                    url: "https://www.technologyreview.com/topic/ai-bias/"
+                }
+            },
+            {
+                id: 5,
+                title: {
+                    id: "Transparansi dalam Sistem AI",
+                    en: "Transparency in AI Systems"
+                },
+                summary: {
+                    id: "Transparansi adalah prinsip kunci dalam etika AI, yang mengacu pada kemampuan untuk memahami dan melacak bagaimana sistem AI membuat keputusan. Artikel ini mengeksplorasi tantangan dan solusi untuk mencapai transparansi dalam sistem AI yang kompleks.",
+                    en: "Transparency is a key principle in AI ethics, referring to the ability to understand and trace how AI systems make decisions. This article explores the challenges and solutions for achieving transparency in complex AI systems."
+                },
+                fullContent: {
+                    id: "Transparansi dalam sistem AI mencakup beberapa aspek: 1) Transparansi teknis - kemampuan untuk memahami cara kerja internal model AI; 2) Transparansi proses - keterbukaan tentang bagaimana sistem dikembangkan, dilatih, dan diimplementasikan; 3) Transparansi keputusan - kemampuan untuk memahami dan menantang keputusan yang dibuat oleh sistem AI. Tantangan utama termasuk kompleksitas model AI modern (terutama deep learning), kekayaan intelektual, dan masalah keamanan. Solusi yang sedang dikembangkan termasuk: 1) Teknik AI yang dapat dijelaskan (XAI); 2) Dokumentasi dan pelaporan yang komprehensif; 3) Audit eksternal; 4) Standar dan sertifikasi; 5) Mekanisme banding untuk keputusan AI. Regulasi seperti GDPR UE sudah mulai mengatasi masalah ini dengan 'hak untuk penjelasan', dan peraturan yang lebih komprehensif diharapkan di masa depan.",
+                    en: "Transparency in AI systems encompasses several aspects: 1) Technical transparency - the ability to understand the internal workings of AI models; 2) Process transparency - openness about how systems are developed, trained, and implemented; 3) Decision transparency - the ability to understand and challenge decisions made by AI systems. Key challenges include the complexity of modern AI models (especially deep learning), intellectual property concerns, and security issues. Solutions being developed include: 1) Explainable AI (XAI) techniques; 2) Comprehensive documentation and reporting; 3) External audits; 4) Standards and certifications; 5) Appeal mechanisms for AI decisions. Regulations like the EU GDPR are already starting to address these issues with the 'right to explanation', and more comprehensive regulations are expected in the future."
+                },
+                date: "2023-01-10",
+                tags: ["regulation", "accountability"],
+                source: {
+                    name: "The Guardian",
+                    url: "https://www.theguardian.com/technology/artificialintelligence"
+                }
+            },
+            {
+                id: 6,
+                title: {
+                    id: "Privasi dan Perlindungan Data dalam AI",
+                    en: "Privacy and Data Protection in AI"
+                },
+                summary: {
+                    id: "Sistem AI sering kali memerlukan data dalam jumlah besar untuk berfungsi dengan baik, yang menimbulkan kekhawatiran serius tentang privasi dan perlindungan data. Artikel ini membahas tantangan privasi dalam AI dan pendekatan untuk mengatasinya.",
+                    en: "AI systems often require large amounts of data to function properly, which raises serious concerns about privacy and data protection. This article discusses privacy challenges in AI and approaches to address them."
+                },
+                fullContent: {
+                    id: "Penggunaan data pribadi dalam sistem AI menimbulkan beberapa masalah privasi: 1) Pengumpulan data yang berlebihan dan tanpa persetujuan; 2) Penggunaan data untuk tujuan yang tidak diungkapkan; 3) Potensi re-identifikasi data anonim; 4) Inferensi informasi sensitif dari data yang tampaknya tidak sensitif. Pendekatan untuk melindungi privasi dalam AI termasuk: 1) Privasi oleh desain (Privacy by Design); 2) Teknik seperti pembelajaran federasi dan pembelajaran diferensial pribadi; 3) Anonimisasi dan pseudonimisasi data; 4) Kontrol akses dan enkripsi yang kuat; 5) Transparansi tentang penggunaan data dan persetujuan yang bermakna. Regulasi seperti GDPR UE memberikan kerangka hukum untuk perlindungan data, tetapi penerapannya dalam konteks AI masih berkembang. Penelitian juga sedang dilakukan pada teknik yang memungkinkan pelatihan model AI yang efektif tanpa mengkompromikan privasi individu.",
+                    en: "The use of personal data in AI systems raises several privacy concerns: 1) Excessive data collection without consent; 2) Use of data for undisclosed purposes; 3) Potential re-identification of anonymized data; 4) Inference of sensitive information from seemingly non-sensitive data. Approaches to protect privacy in AI include: 1) Privacy by Design; 2) Techniques like federated learning and differential privacy; 3) Data anonymization and pseudonymization; 4) Strong access controls and encryption; 5) Transparency about data usage and meaningful consent. Regulations like the EU GDPR provide a legal framework for data protection, but their application in the AI context is still evolving. Research is also being conducted on techniques that allow effective AI model training without compromising individual privacy."
+                },
+                date: "2022-11-05",
+                tags: ["privacy", "regulation"],
+                source: {
+                    name: "Wired",
+                    url: "https://www.wired.com/tag/artificial-intelligence/"
+                }
+            }
+        ];
+
+        // State aplikasi
+        let currentLanguage = 'id';
+        let currentUser = null;
+        let currentArticle = null;
+
+        // Inisialisasi aplikasi
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            // Load preferensi dari localStorage
+            loadPreferences();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Render artikel
+            renderArticles();
+            
+            // Update UI berdasarkan state
+            updateUI();
+        }
+
+        function loadPreferences() {
+            // Load bahasa
+            const savedLanguage = localStorage.getItem('ai-ethics-language');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+            }
+            
+            // Load tema
+            const savedTheme = localStorage.getItem('ai-ethics-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+            
+            // Load user session
+            const savedUser = localStorage.getItem('ai-ethics-user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+            }
+        }
+
+        function setupEventListeners() {
+            // Toggle bahasa
+            document.getElementById('language-toggle').addEventListener('click', toggleLanguage);
+            
+            // Toggle tema
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+            
+            // Login button
+            document.getElementById('login-button').addEventListener('click', toggleLoginModal);
+            
+            // Close login modal
+            document.getElementById('close-login-modal').addEventListener('click', closeLoginModal);
+            document.getElementById('login-modal').addEventListener('click', function(e) {
+                if (e.target === this) closeLoginModal();
+            });
+            
+            // Login/Register tabs
+            document.getElementById('login-tab').addEventListener('click', function() {
+                switchLoginTab('login');
+            });
+            document.getElementById('register-tab').addEventListener('click', function() {
+                switchLoginTab('register');
+            });
+            
+            // Login form
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            
+            // Register form
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+            
+            // Read articles button
+            document.getElementById('read-articles-btn').addEventListener('click', function() {
+                document.getElementById('articles').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Mobile menu
+            document.getElementById('mobile-menu-button').addEventListener('click', toggleMobileMenu);
+            
+            // Close article modal
+            document.getElementById('close-article-modal').addEventListener('click', closeArticleModal);
+            document.getElementById('article-modal').addEventListener('click', function(e) {
+                if (e.target === this) closeArticleModal();
+            });
+            
+            // Copy source button
+            document.getElementById('copy-source-btn').addEventListener('click', copyArticleSource);
+            
+            // Open source button
+            document.getElementById('open-source-btn').addEventListener('click', openArticleSource);
+            
+            // Smooth scroll untuk navigasi
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        // Tutup mobile menu jika terbuka
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        function toggleLanguage() {
+            showLoading('loading-language');
+            
+            setTimeout(() => {
+                currentLanguage = currentLanguage === 'id' ? 'en' : 'id';
+                localStorage.setItem('ai-ethics-language', currentLanguage);
+                
+                // Update flag
+                document.getElementById('language-flag').textContent = currentLanguage === 'id' ? '🇮🇩' : '🇬🇧';
+                
+                // Terjemahkan semua teks
+                translatePage();
+                
+                hideLoading();
+            }, 800);
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('ai-ethics-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('ai-ethics-theme', 'dark');
+            }
+        }
+
+        function toggleLoginModal() {
+            if (currentUser) {
+                // Logout
+                showLoading('logout-success');
+                setTimeout(() => {
+                    currentUser = null;
+                    localStorage.removeItem('ai-ethics-user');
+                    updateUI();
+                    hideLoading();
+                }, 1000);
+            } else {
+                // Buka modal login
+                document.getElementById('login-modal').classList.remove('hidden');
+                switchLoginTab('login');
+            }
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+            // Reset form
+            document.getElementById('login-form').reset();
+            document.getElementById('register-form').reset();
+        }
+
+        function switchLoginTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('login-tab').classList.add('border-blue-600', 'text-blue-600');
+                document.getElementById('login-tab').classList.remove('text-gray-500', 'dark:text-gray-400');
+                document.getElementById('register-tab').classList.remove('border-blue-600', 'text-blue-600');
+                document.getElementById('register-tab').classList.add('text-gray-500', 'dark:text-gray-400');
+                document.getElementById('login-form').classList.remove('hidden');
+                document.getElementById('register-form').classList.add('hidden');
+                document.getElementById('login-modal-title').textContent = translations[currentLanguage]['login-modal-title'];
+            } else {
+                document.getElementById('register-tab').classList.add('border-blue-600', 'text-blue-600');
+                document.getElementById('register-tab').classList.remove('text-gray-500', 'dark:text-gray-400');
+                document.getElementById('login-tab').classList.remove('border-blue-600', 'text-blue-600');
+                document.getElementById('login-tab').classList.add('text-gray-500', 'dark:text-gray-400');
+                document.getElementById('register-form').classList.remove('hidden');
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('login-modal-title').textContent = translations[currentLanguage]['register-tab'];
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Validasi
+            if (!email || !password) {
+                alert(translations[currentLanguage]['error-required']);
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert(translations[currentLanguage]['error-email']);
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert(translations[currentLanguage]['error-password']);
+                return;
+            }
+            
+            showLoading('loading-login');
+            
+            // Simulasi proses login
+            setTimeout(() => {
+                // Cek user di localStorage
+                const users = JSON.parse(localStorage.getItem('ai-ethics-users') || '[]');
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Login berhasil
+                    currentUser = { username: user.username, email: user.email };
+                    localStorage.setItem('ai-ethics-user', JSON.stringify(currentUser));
+                    closeLoginModal();
+                    updateUI();
+                    hideLoading();
+                    alert(translations[currentLanguage]['login-success']);
+                } else {
+                    // Login gagal
+                    hideLoading();
+                    alert(translations[currentLanguage]['error-login']);
+                }
+            }, 1500);
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            
+            // Validasi
+            if (!username || !email || !password) {
+                alert(translations[currentLanguage]['error-required']);
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert(translations[currentLanguage]['error-email']);
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert(translations[currentLanguage]['error-password']);
+                return;
+            }
+            
+            showLoading('loading-register');
+            
+            // Simulasi proses registrasi
+            setTimeout(() => {
+                // Cek apakah email sudah terdaftar
+                const users = JSON.parse(localStorage.getItem('ai-ethics-users') || '[]');
+                const existingUser = users.find(u => u.email === email);
+                
+                if (existingUser) {
+                    hideLoading();
+                    alert(translations[currentLanguage]['error-user-exists']);
+                    return;
+                }
+                
+                // Tambah user baru
+                users.push({ username, email, password });
+                localStorage.setItem('ai-ethics-users', JSON.stringify(users));
+                
+                hideLoading();
+                alert(translations[currentLanguage]['register-success']);
+                switchLoginTab('login');
+            }, 1500);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function renderArticles() {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = '';
+            
+            articles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.className = 'bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden';
+                
+                // Format tanggal
+                const date = new Date(article.date);
+                const formattedDate = date.toLocaleDateString(currentLanguage === 'id' ? 'id-ID' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Render tags
+                const tagsHTML = article.tags.map(tag => 
+                    `<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded">${translations[currentLanguage][tag]}</span>`
+                ).join('');
+                
+                articleElement.innerHTML = `
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">${article.title[currentLanguage]}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${formattedDate} | ${article.source.name}</p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">${article.summary[currentLanguage]}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${tagsHTML}
+                        </div>
+                        <div class="flex justify-between">
+                            <button class="read-more-btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors" data-id="${article.id}">
+                                ${translations[currentLanguage]['read-more']}
+                            </button>
+                            <button class="copy-source-btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2" data-id="${article.id}">
+                                <i class="fas fa-copy"></i>
+                                <span>${translations[currentLanguage]['copy-source']}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(articleElement);
+            });
+            
+            // Add event listeners untuk tombol artikel
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const articleId = parseInt(this.getAttribute('data-id'));
+                    openArticleModal(articleId);
+                });
+            });
+            
+            document.querySelectorAll('.copy-source-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const articleId = parseInt(this.getAttribute('data-id'));
+                    copyArticleSource(articleId);
+                });
+            });
+        }
+
+        function openArticleModal(articleId) {
+            currentArticle = articles.find(a => a.id === articleId);
+            
+            if (!currentArticle) return;
+            
+            document.getElementById('article-modal-title').textContent = currentArticle.title[currentLanguage];
+            
+            // Format tanggal
+            const date = new Date(currentArticle.date);
+            const formattedDate = date.toLocaleDateString(currentLanguage === 'id' ? 'id-ID' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Render tags
+            const tagsHTML = currentArticle.tags.map(tag => 
+                `<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm px-3 py-1 rounded">${translations[currentLanguage][tag]}</span>`
+            ).join('');
+            
+            document.getElementById('article-modal-content').innerHTML = `
+                <div class="mb-4 text-gray-600 dark:text-gray-400">
+                    ${formattedDate} | ${currentArticle.source.name}
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    ${tagsHTML}
+                </div>
+                <p class="mb-4">${currentArticle.fullContent[currentLanguage]}</p>
+                <div class="mt-6 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                    <p class="font-semibold mb-2">${translations[currentLanguage]['about-sources-title']}</p>
+                    <p>${currentArticle.title[currentLanguage]} - ${currentArticle.source.name}</p>
+                    <p class="text-sm mt-2">${currentArticle.source.url}</p>
+                </div>
+            `;
+            
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            currentArticle = null;
+        }
+
+        function copyArticleSource(articleId = null) {
+            const article = articleId ? articles.find(a => a.id === articleId) : currentArticle;
+            
+            if (!article) return;
+            
+            const sourceText = `${article.title[currentLanguage]} - ${article.source.name} - ${article.source.url}`;
+            
+            navigator.clipboard.writeText(sourceText).then(() => {
+                alert(translations[currentLanguage]['copy-success']);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                // Fallback untuk browser yang tidak mendukung clipboard API
+                const textArea = document.createElement('textarea');
+                textArea.value = sourceText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert(translations[currentLanguage]['copy-success']);
+            });
+        }
+
+        function openArticleSource() {
+            if (currentArticle && currentArticle.source.url) {
+                window.open(currentArticle.source.url, '_blank');
+            }
+        }
+
+        function translatePage() {
+            // Terjemahkan semua elemen dengan data-key
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[currentLanguage][key]) {
+                    element.innerHTML = translations[currentLanguage][key];
+                }
+            });
+            
+            // Update teks khusus
+            document.getElementById('hero-title').textContent = translations[currentLanguage]['hero-title'];
+            document.getElementById('hero-subtitle').textContent = translations[currentLanguage]['hero-subtitle'];
+            document.getElementById('read-articles-btn').textContent = translations[currentLanguage]['read-articles-btn'];
+            document.getElementById('articles-title').textContent = translations[currentLanguage]['articles-title'];
+            document.getElementById('about-title').textContent = translations[currentLanguage]['about-title'];
+            document.getElementById('about-description').textContent = translations[currentLanguage]['about-description'];
+            document.getElementById('about-mission').textContent = translations[currentLanguage]['about-mission'];
+            document.getElementById('about-sources-title').textContent = translations[currentLanguage]['about-sources-title'];
+            document.getElementById('about-sources').textContent = translations[currentLanguage]['about-sources'];
+            document.getElementById('footer-copyright').innerHTML = translations[currentLanguage]['footer-copyright'];
+            document.getElementById('footer-version').textContent = translations[currentLanguage]['footer-version'];
+            document.getElementById('footer-source').textContent = translations[currentLanguage]['footer-source'];
+            
+            // Update login button
+            updateLoginButton();
+            
+            // Render ulang artikel dengan bahasa baru
+            renderArticles();
+        }
+
+        function updateUI() {
+            updateLoginButton();
+            translatePage();
+        }
+
+        function updateLoginButton() {
+            const loginButton = document.getElementById('login-button');
+            const loginText = document.getElementById('login-text');
+            
+            if (currentUser) {
+                loginText.textContent = translations[currentLanguage]['welcome'] + currentUser.username;
+                loginButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                loginButton.classList.add('bg-green-600', 'hover:bg-green-700');
+            } else {
+                loginText.textContent = translations[currentLanguage]['login'];
+                loginButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                loginButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            }
+        }
+
+        function showLoading(messageKey) {
+            document.getElementById('loading-text').textContent = translations[currentLanguage][messageKey];
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            document.body.style.cursor = 'wait';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.add('hidden');
+            document.body.style.cursor = 'default';
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+</body>
+</html>
